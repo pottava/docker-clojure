@@ -11,7 +11,8 @@ ENV CLOJURE_VERSION=1.8.0 \
 RUN set -ex \
       && apk --no-cache add --virtual build-dependencies curl unzip \
       && apk --no-cache add bash \
-      && cd /opt \
+      && mkdir -p /usr/lib/clojure \
+      && cd /usr/lib/clojure \
       && curl -O --location --silent --show-error http://repo1.maven.org/maven2/org/clojure/clojure/${CLOJURE_VERSION}/clojure-${CLOJURE_VERSION}.zip \
       && curl -O --location --silent --show-error https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
       && mv lein /usr/bin/ \
