@@ -5,7 +5,7 @@ FROM pottava/java:8
 
 ENV CLOJURE_VERSION=1.8.0
 
-RUN set -ex \
+RUN set -e \
       && apk --no-cache add --virtual build-dependencies curl unzip \
       && mkdir -p /usr/lib/clojure \
       && cd /usr/lib/clojure \
@@ -20,4 +20,5 @@ RUN set -ex \
           clojure-${CLOJURE_VERSION}/test \
       && apk del --purge build-dependencies
 
-CMD java -cp /usr/lib/clojure/clojure-${CLOJURE_VERSION}/clojure-${CLOJURE_VERSION}.jar clojure.main
+ENTRYPOINT ["java"]
+CMD ["-cp", "/usr/lib/clojure/clojure-${CLOJURE_VERSION}/clojure-${CLOJURE_VERSION}.jar", "clojure.main"]
